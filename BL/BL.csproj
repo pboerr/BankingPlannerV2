@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D8891F9B-7ABD-4500-A5A6-8F4F8939F92E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BL</RootNamespace>
+    <AssemblyName>BL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.BulkInsert, Version=6.0.2.8, Culture=neutral, PublicKeyToken=630a17433349cb76, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.BulkInsert-ef6.6.0.2.8\lib\Net45\EntityFramework.BulkInsert.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.MappingAPI, Version=6.0.0.7, Culture=neutral, PublicKeyToken=7ee2e825d201459e, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.MappingAPI.6.0.0.7\lib\net45\EntityFramework.MappingAPI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\Clientes\AlternativasCliente.cs" />
+    <Compile Include="Classes\Clientes\Cliente.cs" />
+    <Compile Include="Classes\Clientes\Visita.cs" />
+    <Compile Include="Classes\EntidadesComplejas\ATMReciclador.cs" />
+    <Compile Include="Classes\IEvento\EventoIngresoVisita.cs" />
+    <Compile Include="Classes\IEvento\EventoLimiteAbandonoRequerimiento.cs" />
+    <Compile Include="Classes\IEvento\EventoLimiteAbandonoVisita.cs" />
+    <Compile Include="Infrastructure\ClasesGenericas\Fila.cs" />
+    <Compile Include="Classes\IInterrumpible\InterrupcionDisponibilidadEfectivo.cs" />
+    <Compile Include="Classes\IInterrumpible\TipoInterrupcionBanca.cs" />
+    <Compile Include="Classes\EntidadesComplejas\Tesorero.cs" />
+    <Compile Include="Classes\Clientes\ReqServicio\DepositoCheques.cs" />
+    <Compile Include="Classes\Clientes\ReqServicio\ExtraccionEfectivo.cs" />
+    <Compile Include="Classes\Clientes\ReqSoporte\AbastecimientoEfectivo.cs" />
+    <Compile Include="Classes\Clientes\ReqSoporte\RequerimientoSoporte.cs" />
+    <Compile Include="Archive\TipoRequerimientoBanca.cs" />
+    <Compile Include="Classes\Clientes\Requerimiento.cs" />
+    <Compile Include="Classes\IReceptor\DatosEvaluarProximasInterrupciones.cs" />
+    <Compile Include="Classes\ISimulador\SimuladorBanca.cs" />
+    <Compile Include="Classes\IEvento\Archivo\EventoFinRequerimiento.cs" />
+    <Compile Include="Classes\IEvento\Archivo\EventoIngresoRequerimiento.cs" />
+    <Compile Include="Archive\EventoIRequerimientoArgs.cs" />
+    <Compile Include="Classes\EntidadesComplejas\ATM.cs" />
+    <Compile Include="Classes\IInterrumpible\InterrupcionBanca.cs" />
+    <Compile Include="Classes\IReceptor\DatosProponerRequerimientoBanca.cs" />
+    <Compile Include="Classes\Clientes\DatosFinalizarRequerimientoBanca.cs" />
+    <Compile Include="Classes\ISimulador\Datos\DatosProximoServicioPosible.cs" />
+    <Compile Include="Classes\IEvento\Archivo\EventoLimiteAbandono.cs" />
+    <Compile Include="Infrastructure\ClasesGenericas\FilaEventos.cs" />
+    <Compile Include="Classes\IMovilizable\PropuestaMovimiento.cs" />
+    <Compile Include="Archive\Seccion.cs" />
+    <Compile Include="Classes\Clientes\ReqServicio\RequerimientoBanca.cs" />
+    <Compile Include="Classes\Clientes\DatosIngresarRequerimientoBanca.cs" />
+    <Compile Include="Classes\ISimulador\Datos\DatosProcesarLimiteAbandonoBanca.cs" />
+    <Compile Include="Archive\TipoCliente.cs" />
+    <Compile Include="Classes\EntidadesComplejas\Ubicacion.cs" />
+    <Compile Include="Archive\SimDemandaCalc.cs" />
+    <Compile Include="Archive\SimOfertaCalc.cs" />
+    <Compile Include="Archive\SimSeccionCalc.cs" />
+    <Compile Include="Archive\SimSiteCalc.cs" />
+    <Compile Include="Classes\IReceptor\PropuestaServicio.cs" />
+    <Compile Include="Classes\Statistics.cs" />
+    <Compile Include="Infrastructure\Enumerations.cs" />
+    <Compile Include="Infrastructure\ICliente\ICliente.cs" />
+    <Compile Include="Infrastructure\ICliente\ITipoCliente.cs" />
+    <Compile Include="Infrastructure\ICliente\IVisita.cs" />
+    <Compile Include="Infrastructure\IInterrumpible\IInterrupcionSoporte.cs" />
+    <Compile Include="Infrastructure\IInterrumpible\ITipoInterrupcion.cs" />
+    <Compile Include="Infrastructure\IMovilizable\IArco.cs" />
+    <Compile Include="Infrastructure\IPrestador\IPrestador.cs" />
+    <Compile Include="Infrastructure\IPrestador\IPrestadorClientes\IPrestadorDepositarCheques.cs" />
+    <Compile Include="Infrastructure\IPrestador\IPrestadorClientes\IPrestadorDepositarSobres.cs" />
+    <Compile Include="Infrastructure\IPrestador\IPrestadorClientes\IPrestadorDepositoEfectivo.cs" />
+    <Compile Include="Infrastructure\IPrestador\IPrestadorClientes\IPrestadorExtraccionEfectivo.cs" />
+    <Compile Include="Infrastructure\IPrestador\IPrestadorClientes\IPrestadorResponderConsulta.cs" />
+    <Compile Include="Infrastructure\IPrestador\IPrestadorSoporte\IPrestadorSoporte.cs" />
+    <Compile Include="Infrastructure\IRequerimiento\IReqSoporte\IReqSoporte.cs" />
+    <Compile Include="Infrastructure\IRequerimiento\IRequerimiento.cs" />
+    <Compile Include="Archive\ITipoCliente.cs" />
+    <Compile Include="Archive\ITipoRequerimiento.cs" />
+    <Compile Include="Infrastructure\IRequerimiento\ITipoRequerimiento.cs" />
+    <Compile Include="Infrastructure\IEvento\IFilaEventos.cs" />
+    <Compile Include="Infrastructure\IInterrumpible\IInterrumpible.cs" />
+    <Compile Include="Infrastructure\IGeneradorPropuestas\IGeneradorPropuestas.cs" />
+    <Compile Include="Infrastructure\IMovilizable\INodo.cs" />
+    <Compile Include="Infrastructure\IMovilizable\IDesplazamiento.cs" />
+    <Compile Include="Infrastructure\IEvento\IEvento.cs" />
+    <Compile Include="Infrastructure\ISimulador\IFila.cs" />
+    <Compile Include="Infrastructure\ISimulador\ISimulador.cs" />
+    <Compile Include="Infrastructure\IGeneradorPropuestas\IDatosProponerRequerimiento.cs" />
+    <Compile Include="Infrastructure\ISimulador\IDatos\IDatosProcesarLimiteAbandono.cs" />
+    <Compile Include="Infrastructure\ISimulador\IDatos\IDatosProximoServicioPosible.cs" />
+    <Compile Include="Repositories\ConnectedRepository.cs" />
+    <Compile Include="Infrastructure\IInterrumpible\IInterrupcion.cs" />
+    <Compile Include="Infrastructure\IGestorServicios\IGestorServicios.cs" />
+    <Compile Include="Infrastructure\IMovilizable\IDesplazable.cs" />
+    <Compile Include="Infrastructure\IPrestador\IPrestadorClientes\IPrestadorClientes.cs" />
+    <Compile Include="Infrastructure\IGeneradorPropuestas\IPropuestaServicio.cs" />
+    <Compile Include="Infrastructure\IRequerimiento\IReqServicio\IReqServicio.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Notas.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure\IPlanificador\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

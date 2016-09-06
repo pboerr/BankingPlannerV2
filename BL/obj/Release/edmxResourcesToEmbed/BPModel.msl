@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BankingPlannerModelStoreContainer" CdmEntityContainer="BankingPlannerEntities">
+    <EntitySetMapping Name="sim_catalogos_detalle">
+      <EntityTypeMapping TypeName="BankingPlannerModel.SimCatalogoDetalle">
+        <MappingFragment StoreEntitySet="sim_catalogos_detalle">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="sim_catalogo" ColumnName="sim_catalogo" />
+          <ScalarProperty Name="tipo_servicio" ColumnName="tipo_servicio" />
+          <ScalarProperty Name="sim_tipo_cliente" ColumnName="sim_tipo_cliente" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sim_catalogos_servicio">
+      <EntityTypeMapping TypeName="BankingPlannerModel.SimCatalogoServicio">
+        <MappingFragment StoreEntitySet="sim_catalogos_servicio">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="catalogo_servicio" ColumnName="catalogo_servicio" />
+          <ScalarProperty Name="sim_escenario" ColumnName="sim_escenario" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sim_demanda">
+      <EntityTypeMapping TypeName="BankingPlannerModel.SimDemanda">
+        <MappingFragment StoreEntitySet="sim_demanda">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="sim_seccion" ColumnName="sim_seccion" />
+          <ScalarProperty Name="tipo_servicio" ColumnName="tipo_servicio" />
+          <ScalarProperty Name="sim_tipo_cliente" ColumnName="sim_tipo_cliente" />
+          <ScalarProperty Name="tipo_calendario" ColumnName="tipo_calendario" />
+          <ScalarProperty Name="cantidad_media" ColumnName="cantidad_media" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sim_escenarios">
+      <EntityTypeMapping TypeName="BankingPlannerModel.SimEscenario">
+        <MappingFragment StoreEntitySet="sim_escenarios">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="dtFecha" ColumnName="dtFecha" />
+          <ScalarProperty Name="dtDesde" ColumnName="dtDesde" />
+          <ScalarProperty Name="dtHasta" ColumnName="dtHasta" />
+          <ScalarProperty Name="proyecto" ColumnName="proyecto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sim_interrupciones">
+      <EntityTypeMapping TypeName="BankingPlannerModel.SimInterrupcion">
+        <MappingFragment StoreEntitySet="sim_interrupciones">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="sim_oferta" ColumnName="sim_oferta" />
+          <ScalarProperty Name="sim_tipo_interrupcion" ColumnName="sim_tipo_interrupcion" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sim_oferta">
+      <EntityTypeMapping TypeName="BankingPlannerModel.SimOferta">
+        <MappingFragment StoreEntitySet="sim_oferta">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="sim_seccion" ColumnName="sim_seccion" />
+          <ScalarProperty Name="sim_catalogo_servicio" ColumnName="sim_catalogo_servicio" />
+          <ScalarProperty Name="tipo_calendario" ColumnName="tipo_calendario" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sim_parametros_abandono">
+      <EntityTypeMapping TypeName="BankingPlannerModel.SimParametrosAbandono">
+        <MappingFragment StoreEntitySet="sim_parametros_abandono">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="tipo_servicio" ColumnName="tipo_servicio" />
+          <ScalarProperty Name="sim_tipo_cliente" ColumnName="sim_tipo_cliente" />
+          <ScalarProperty Name="media_espera" ColumnName="media_espera" />
+          <ScalarProperty Name="desvio_espera" ColumnName="desvio_espera" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sim_parametros_atencion">
+      <EntityTypeMapping TypeName="BankingPlannerModel.SimParametrosAtencion">
+        <MappingFragment StoreEntitySet="sim_parametros_atencion">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="sim_seccion" ColumnName="sim_seccion" />
+          <ScalarProperty Name="tipo_servicio" ColumnName="tipo_servicio" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="media_atencion_sec" ColumnName="media_atencion_sec" />
+          <ScalarProperty Name="desvio_atencion_sec" ColumnName="desvio_atencion_sec" />
+          <ScalarProperty Name="limite_atencion_sec" ColumnName="limite_atencion_sec" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sim_proyectos">
+      <EntityTypeMapping TypeName="BankingPlannerModel.SimProyecto">
+        <MappingFragment StoreEntitySet="sim_proyectos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sim_secciones">
+      <EntityTypeMapping TypeName="BankingPlannerModel.SimSeccion">
+        <MappingFragment StoreEntitySet="sim_secciones">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="sim_site" ColumnName="sim_site" />
+          <ScalarProperty Name="tipo_seccion" ColumnName="tipo_seccion" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="tipo_calendario" ColumnName="tipo_calendario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sim_sites">
+      <EntityTypeMapping TypeName="BankingPlannerModel.SimSite">
+        <MappingFragment StoreEntitySet="sim_sites">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="site" ColumnName="site" />
+          <ScalarProperty Name="sim_escenario" ColumnName="sim_escenario" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sim_soporte">
+      <EntityTypeMapping TypeName="BankingPlannerModel.SimSoporte">
+        <MappingFragment StoreEntitySet="sim_soporte">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="sim_oferta" ColumnName="sim_oferta" />
+          <ScalarProperty Name="sim_tipo_interrupcion" ColumnName="sim_tipo_interrupcion" />
+          <ScalarProperty Name="sim_seccion" ColumnName="sim_seccion" />
+          <ScalarProperty Name="tipo_calendario" ColumnName="tipo_calendario" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="media_duracion" ColumnName="media_duracion" />
+          <ScalarProperty Name="desvio_duracion" ColumnName="desvio_duracion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sim_tipos_cliente">
+      <EntityTypeMapping TypeName="BankingPlannerModel.SimTipoCliente">
+        <MappingFragment StoreEntitySet="sim_tipos_cliente">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="sim_escenario" ColumnName="sim_escenario" />
+          <ScalarProperty Name="tipo_cliente" ColumnName="tipo_cliente" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="prioridad" ColumnName="prioridad" />
+          <ScalarProperty Name="generico" ColumnName="generico" />
+          <ScalarProperty Name="sla" ColumnName="sla" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sim_tipos_interrupcion">
+      <EntityTypeMapping TypeName="BankingPlannerModel.SimTipoInterrupcion">
+        <MappingFragment StoreEntitySet="sim_tipos_interrupcion">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="tipo_interrupcion" ColumnName="tipo_interrupcion" />
+          <ScalarProperty Name="sim_escenario" ColumnName="sim_escenario" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="estacional" ColumnName="estacional" />
+          <ScalarProperty Name="media_intervalo" ColumnName="media_intervalo" />
+          <ScalarProperty Name="media_duracion" ColumnName="media_duracion" />
+          <ScalarProperty Name="desvio_duracion" ColumnName="desvio_duracion" />
+          <ScalarProperty Name="transacciones" ColumnName="transacciones" />
+          <ScalarProperty Name="factor_interrupcion" ColumnName="factor_interrupcion" />
+          <ScalarProperty Name="factor_velocidad" ColumnName="factor_velocidad" />
+          <ScalarProperty Name="tipo_calendario_interrupcion" ColumnName="tipo_calendario_interrupcion" />
+          <ScalarProperty Name="balanceo" ColumnName="balanceo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sim_tipos_interrupcion_tipos_servicio">
+      <EntityTypeMapping TypeName="BankingPlannerModel.SimTipoInterrupcionTipoServicio">
+        <MappingFragment StoreEntitySet="sim_tipos_interrupcion_tipos_servicio">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="sim_tipo_interrupcion" ColumnName="sim_tipo_interrupcion" />
+          <ScalarProperty Name="tipo_servicio" ColumnName="tipo_servicio" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SimDemandasCalculadas">
+      <EntityTypeMapping TypeName="BankingPlannerModel.SimDemandaCalculada">
+        <MappingFragment StoreEntitySet="SimDemandasCalculadas">
+          <ScalarProperty Name="DtLimiteAbandono" ColumnName="DtLimiteAbandono" />
+          <ScalarProperty Name="OfertasActivas" ColumnName="OfertasActivas" />
+          <ScalarProperty Name="ProfundidadFilaSeccion" ColumnName="ProfundidadFilaSeccion" />
+          <ScalarProperty Name="SimOfertaId" ColumnName="SimOfertaId" />
+          <ScalarProperty Name="DtEgreso" ColumnName="DtEgreso" />
+          <ScalarProperty Name="DtAtencion" ColumnName="DtAtencion" />
+          <ScalarProperty Name="DtIngreso" ColumnName="DtIngreso" />
+          <ScalarProperty Name="SimDemandaId" ColumnName="SimDemandaId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SimInterrupcionesCalculadas">
+      <EntityTypeMapping TypeName="BankingPlannerModel.SimInterrupcionCalculada">
+        <MappingFragment StoreEntitySet="SimInterrupcionesCalculadas">
+          <ScalarProperty Name="DtFin" ColumnName="DtFin" />
+          <ScalarProperty Name="DtInicio" ColumnName="DtInicio" />
+          <ScalarProperty Name="SimTipoInterrupcionId" ColumnName="SimTipoInterrupcionId" />
+          <ScalarProperty Name="SimOfertaId" ColumnName="SimOfertaId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,56 @@
+﻿
+COMENTARIOS SOBRE SIMULADOR BASICO
+//GenerarInterrupcionesDiarias
+//GenerarInterrupcionesObligatorias
+//EliminarInterrupcionesOcurridas
+
+//CalcularDateTimeProximoIngreso
+//CalcularDateTimeProximoEgreso
+
+//AbandonarLaDemandaActual si no puede ser atendida por nadie --> esto va aparte
+
+//Si hay un cliente esperando, atenderlo o abandonarlo segun corresponda.
+
+//Si el proxIngreso < proxEgreso --> ingresar la demanda al sistema.
+    //else
+        //Sortea abandono, y si aplica --> abandonar la demanda
+        //else
+            //Sorteo atencion
+            //Incremento contador de transacciones para la oferta
+            //Actualizar fecha auxiliar de proximoEgreso y fecha de egreso de la oferta seleccionada
+            //Genera interrupcion de fin de atencion
+            //Actualizar disponibilidad de ofertas: fecha en que se "liberan"
+
+
+
+
+			 private IEvento _EmitirFuncIEvento(IEvento evento)
+        {            
+            List<IEvento> feedback = new List<IEvento>();
+            foreach (Func<IEvento, IEvento> func in _ListaSuscriptoresFuncIEvento.GetInvocationList())
+            {
+                feedback.Add(func(evento));
+            }
+            var output = feedback.Where(x => x.TipoEvento != TipoEvento.Nulo).FirstOrDefault();
+            return output;
+        }
+
+		        private Action<IEvento> _ListaReceptores;
+		    public void AgregarReceptor(Action<IEvento> receptor)
+        {
+            if(_ListaReceptores == null)
+            {
+                _ListaReceptores = receptor;
+            }
+            else
+            {
+                _ListaReceptores += receptor;
+            }
+        }
+        public void RemoverReceptor(Action<IEvento> receptor)
+        {
+            if(_ListaReceptores != null)
+            {
+                _ListaReceptores -= receptor;
+            }
+        }

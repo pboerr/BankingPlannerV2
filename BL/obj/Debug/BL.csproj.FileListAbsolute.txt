@@ -1,0 +1,17 @@
+C:\Users\Francisco\Google Drive\05_GitHub\BankingPlanner\BankingPlanner\DAL\obj\Debug\BL.csprojResolveAssemblyReference.cache
+C:\Users\Francisco\Google Drive\05_GitHub\BankingPlanner\BankingPlanner\DAL\obj\Debug\DAL.dll
+C:\Users\Francisco\Google Drive\05_GitHub\BankingPlanner\BankingPlanner\DAL\obj\Debug\DAL.pdb
+C:\Users\Francisco\Google Drive\05_GitHub\BankingPlanner\BankingPlanner\BL\obj\Debug\BL.csprojResolveAssemblyReference.cache
+C:\Users\Francisco\Google Drive\05_GitHub\BankingPlanner\BankingPlanner\BL\bin\Debug\EntityFramework.BulkInsert.dll
+C:\Users\Francisco\Google Drive\05_GitHub\BankingPlanner\BankingPlanner\BL\bin\Debug\EntityFramework.dll
+C:\Users\Francisco\Google Drive\05_GitHub\BankingPlanner\BankingPlanner\BL\bin\Debug\EntityFramework.MappingAPI.dll
+C:\Users\Francisco\Google Drive\05_GitHub\BankingPlanner\BankingPlanner\BL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Francisco\Google Drive\05_GitHub\BankingPlanner\BankingPlanner\BL\bin\Debug\EntityFramework.xml
+C:\Users\Francisco\Google Drive\05_GitHub\BankingPlanner\BankingPlanner\BL\bin\Debug\EntityFramework.BulkInsert.pdb
+C:\Users\Francisco\Google Drive\05_GitHub\BankingPlanner\BankingPlanner\BL\bin\Debug\EntityFramework.MappingAPI.pdb
+C:\Users\Francisco\Google Drive\05_GitHub\BankingPlanner\BankingPlanner\BL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Francisco\Google Drive\05_GitHub\BankingPlanner\BankingPlanner\BL\bin\Debug\BL.dll.config
+C:\Users\Francisco\Google Drive\05_GitHub\BankingPlanner\BankingPlanner\BL\bin\Debug\BL.dll
+C:\Users\Francisco\Google Drive\05_GitHub\BankingPlanner\BankingPlanner\BL\bin\Debug\BL.pdb
+C:\Users\Francisco\Google Drive\05_GitHub\BankingPlanner\BankingPlanner\BL\obj\Debug\BL.dll
+C:\Users\Francisco\Google Drive\05_GitHub\BankingPlanner\BankingPlanner\BL\obj\Debug\BL.pdb

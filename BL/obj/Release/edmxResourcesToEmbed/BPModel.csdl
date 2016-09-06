@@ -1,0 +1,657 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankingPlannerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="SimCatalogoDetalle">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sim_catalogo" Type="Int32" Nullable="false" />
+    <Property Name="tipo_servicio" Type="Int32" Nullable="false" />
+    <Property Name="sim_tipo_cliente" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SimCatalogoServicio" Relationship="Self.FK_sim_catalogos_detalle_sim_catalogos_servicio" FromRole="sim_catalogos_detalle" ToRole="sim_catalogos_servicio" />
+    <NavigationProperty Name="SimTipoCliente" Relationship="Self.FK_sim_catalogos_detalle_sim_tipos_cliente" FromRole="sim_catalogos_detalle" ToRole="sim_tipos_cliente" />
+  </EntityType>
+  <EntityType Name="SimCatalogoServicio">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="catalogo_servicio" Type="Int32" Nullable="false" />
+    <Property Name="sim_escenario" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SimCatalogoDetalleICollection" Relationship="Self.FK_sim_catalogos_detalle_sim_catalogos_servicio" FromRole="sim_catalogos_servicio" ToRole="sim_catalogos_detalle" />
+    <NavigationProperty Name="SimEscenario" Relationship="Self.FK_sim_catalogos_servicio_sim_escenarios" FromRole="sim_catalogos_servicio" ToRole="sim_escenarios" />
+    <NavigationProperty Name="SimOfertaICollection" Relationship="Self.FK_sim_oferta_sim_catalogos_servicio" FromRole="sim_catalogos_servicio" ToRole="sim_oferta" />
+  </EntityType>
+  <EntityType Name="SimDemanda">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sim_seccion" Type="Int32" Nullable="false" />
+    <Property Name="tipo_servicio" Type="Int32" Nullable="false" />
+    <Property Name="sim_tipo_cliente" Type="Int32" Nullable="false" />
+    <Property Name="tipo_calendario" Type="Int32" />
+    <Property Name="cantidad_media" Type="Double" Nullable="false" />
+    <Property Name="estado" Type="Int32" />
+    <NavigationProperty Name="SimSeccion" Relationship="Self.FK_sim_demanda_sim_secciones" FromRole="sim_demanda" ToRole="sim_secciones" />
+    <NavigationProperty Name="SimTipoCliente" Relationship="Self.FK_sim_demanda_sim_tipos_cliente" FromRole="sim_demanda" ToRole="sim_tipos_cliente" />
+    <NavigationProperty Name="SimDemandaCalculadaICollection" Relationship="BankingPlannerModel.FK_SimDemandas_sim_demanda" FromRole="sim_demanda" ToRole="SimDemandasCalculadas" />
+  </EntityType>
+  <EntityType Name="SimEscenario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <Property Name="dtFecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="dtDesde" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="dtHasta" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="proyecto" Type="Int32" />
+    <NavigationProperty Name="SimCatalogoServicioICollection" Relationship="Self.FK_sim_catalogos_servicio_sim_escenarios" FromRole="sim_escenarios" ToRole="sim_catalogos_servicio" />
+    <NavigationProperty Name="SimProyecto" Relationship="Self.FK_sim_escenarios_sim_proyectos" FromRole="sim_escenarios" ToRole="sim_proyectos" />
+    <NavigationProperty Name="SimSiteICollection" Relationship="Self.FK_sim_sites_sim_escenarios" FromRole="sim_escenarios" ToRole="sim_sites" />
+    <NavigationProperty Name="SimTipoClienteICollection" Relationship="Self.FK_sim_tipos_cliente_sim_escenarios" FromRole="sim_escenarios" ToRole="sim_tipos_cliente" />
+    <NavigationProperty Name="SimTipoInterrupcionICollection" Relationship="Self.FK_sim_tipos_interrupcion_sim_escenarios" FromRole="sim_escenarios" ToRole="sim_tipos_interrupcion" />
+  </EntityType>
+  <EntityType Name="SimInterrupcion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sim_oferta" Type="Int32" Nullable="false" />
+    <Property Name="sim_tipo_interrupcion" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Int32" />
+    <NavigationProperty Name="SimOferta" Relationship="Self.FK_sim_interrupciones_sim_oferta" FromRole="sim_interrupciones" ToRole="sim_oferta" />
+    <NavigationProperty Name="SimTipoInterrupcion" Relationship="Self.FK_sim_interrupciones_tipos_interrupciones" FromRole="sim_interrupciones" ToRole="sim_tipos_interrupcion" />
+  </EntityType>
+  <EntityType Name="SimOferta">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="sim_seccion" Type="Int32" Nullable="false" />
+    <Property Name="sim_catalogo_servicio" Type="Int32" Nullable="false" />
+    <Property Name="tipo_calendario" Type="Int32" />
+    <Property Name="estado" Type="Int32" />
+    <NavigationProperty Name="SimCatalogoServicio" Relationship="Self.FK_sim_oferta_sim_catalogos_servicio" FromRole="sim_oferta" ToRole="sim_catalogos_servicio" />
+    <NavigationProperty Name="SimInterrupcionICollection" Relationship="Self.FK_sim_interrupciones_sim_oferta" FromRole="sim_oferta" ToRole="sim_interrupciones" />
+    <NavigationProperty Name="SimSeccion" Relationship="Self.FK_sim_oferta_sim_secciones" FromRole="sim_oferta" ToRole="sim_secciones" />
+    <NavigationProperty Name="SimSoporteICollection" Relationship="Self.FK_sim_soporte_sim_oferta" FromRole="sim_oferta" ToRole="sim_soporte" />
+    <NavigationProperty Name="SimDemandaCalculadaICollection" Relationship="BankingPlannerModel.FK_SimDemandasCalculadas_sim_oferta" FromRole="sim_oferta" ToRole="SimDemandasCalculadas" />
+    <NavigationProperty Name="SimInterrupcionCalculadaICollection" Relationship="BankingPlannerModel.FK_SimInterrupcionesCalculadas_sim_oferta" FromRole="sim_oferta" ToRole="SimInterrupcionesCalculadas" />
+  </EntityType>
+  <EntityType Name="SimParametrosAbandono">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tipo_servicio" Type="Int32" Nullable="false" />
+    <Property Name="sim_tipo_cliente" Type="Int32" Nullable="false" />
+    <Property Name="media_espera" Type="Int32" Nullable="false" />
+    <Property Name="desvio_espera" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Int32" />
+    <NavigationProperty Name="SimTipoCliente" Relationship="Self.FK_sim_parametros_abandono_sim_tipos_cliente" FromRole="sim_parametros_abandono" ToRole="sim_tipos_cliente" />
+  </EntityType>
+  <EntityType Name="SimParametrosAtencion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sim_seccion" Type="Int32" Nullable="false" />
+    <Property Name="tipo_servicio" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Int32" />
+    <Property Name="media_atencion_sec" Type="Int32" Nullable="false" />
+    <Property Name="desvio_atencion_sec" Type="Int32" Nullable="false" />
+    <Property Name="limite_atencion_sec" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SimSeccion" Relationship="Self.FK_sim_parametros_atencion_sim_secciones" FromRole="sim_parametros_atencion" ToRole="sim_secciones" />
+  </EntityType>
+  <EntityType Name="SimProyecto">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SimEscenarioICollection" Relationship="Self.FK_sim_escenarios_sim_proyectos" FromRole="sim_proyectos" ToRole="sim_escenarios" />
+  </EntityType>
+  <EntityType Name="SimSeccion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sim_site" Type="Int32" Nullable="false" />
+    <Property Name="tipo_seccion" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <Property Name="tipo_calendario" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SimDemandaICollection" Relationship="Self.FK_sim_demanda_sim_secciones" FromRole="sim_secciones" ToRole="sim_demanda" />
+    <NavigationProperty Name="SimOfertaICollection" Relationship="Self.FK_sim_oferta_sim_secciones" FromRole="sim_secciones" ToRole="sim_oferta" />
+    <NavigationProperty Name="SimParametrosAtencionICollection" Relationship="Self.FK_sim_parametros_atencion_sim_secciones" FromRole="sim_secciones" ToRole="sim_parametros_atencion" />
+    <NavigationProperty Name="SimSite" Relationship="Self.FK_sim_secciones_sim_sites" FromRole="sim_secciones" ToRole="sim_sites" />
+    <NavigationProperty Name="SimSoporteICollection" Relationship="Self.FK_sim_soporte_sim_secciones" FromRole="sim_secciones" ToRole="sim_soporte" />
+  </EntityType>
+  <EntityType Name="SimSite">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="site" Type="Int32" Nullable="false" />
+    <Property Name="sim_escenario" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SimEscenario" Relationship="Self.FK_sim_sites_sim_escenarios" FromRole="sim_sites" ToRole="sim_escenarios" />
+    <NavigationProperty Name="SimSeccionICollection" Relationship="Self.FK_sim_secciones_sim_sites" FromRole="sim_sites" ToRole="sim_secciones" />
+  </EntityType>
+  <EntityType Name="SimSoporte">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sim_oferta" Type="Int32" Nullable="false" />
+    <Property Name="sim_tipo_interrupcion" Type="Int32" Nullable="false" />
+    <Property Name="sim_seccion" Type="Int32" Nullable="false" />
+    <Property Name="tipo_calendario" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Int32" />
+    <Property Name="media_duracion" Type="Int32" Nullable="false" />
+    <Property Name="desvio_duracion" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SimOferta" Relationship="Self.FK_sim_soporte_sim_oferta" FromRole="sim_soporte" ToRole="sim_oferta" />
+    <NavigationProperty Name="SimSeccion" Relationship="Self.FK_sim_soporte_sim_secciones" FromRole="sim_soporte" ToRole="sim_secciones" />
+    <NavigationProperty Name="SimTipoInterrupcion" Relationship="Self.FK_sim_catalogos_soporte_sim_tipos_interrupcion" FromRole="sim_soporte" ToRole="sim_tipos_interrupcion" />
+  </EntityType>
+  <EntityType Name="SimTipoCliente">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sim_escenario" Type="Int32" Nullable="false" />
+    <Property Name="tipo_cliente" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Int32" />
+    <Property Name="valor" Type="Double" Nullable="false" />
+    <Property Name="prioridad" Type="Int32" Nullable="false" />
+    <Property Name="generico" Type="Int32" Nullable="false" />
+    <Property Name="sla" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SimCatalogoDetalleICollection" Relationship="Self.FK_sim_catalogos_detalle_sim_tipos_cliente" FromRole="sim_tipos_cliente" ToRole="sim_catalogos_detalle" />
+    <NavigationProperty Name="SimDemandaICollection" Relationship="Self.FK_sim_demanda_sim_tipos_cliente" FromRole="sim_tipos_cliente" ToRole="sim_demanda" />
+    <NavigationProperty Name="SimEscenario" Relationship="Self.FK_sim_tipos_cliente_sim_escenarios" FromRole="sim_tipos_cliente" ToRole="sim_escenarios" />
+    <NavigationProperty Name="SimParametrosAbandonoICollection" Relationship="Self.FK_sim_parametros_abandono_sim_tipos_cliente" FromRole="sim_tipos_cliente" ToRole="sim_parametros_abandono" />
+  </EntityType>
+  <EntityType Name="SimTipoInterrupcion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tipo_interrupcion" Type="Int32" Nullable="false" />
+    <Property Name="sim_escenario" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Int32" />
+    <Property Name="estacional" Type="Int32" Nullable="false" />
+    <Property Name="media_intervalo" Type="Int64" Nullable="false" />
+    <Property Name="media_duracion" Type="Int64" Nullable="false" />
+    <Property Name="desvio_duracion" Type="Int64" Nullable="false" />
+    <Property Name="transacciones" Type="Int32" Nullable="false" />
+    <Property Name="factor_interrupcion" Type="Double" Nullable="false" />
+    <Property Name="factor_velocidad" Type="Double" Nullable="false" />
+    <Property Name="tipo_calendario_interrupcion" Type="Int32" Nullable="false" />
+    <Property Name="balanceo" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="SimEscenario" Relationship="Self.FK_sim_tipos_interrupcion_sim_escenarios" FromRole="sim_tipos_interrupcion" ToRole="sim_escenarios" />
+    <NavigationProperty Name="SimInterrupcionICollection" Relationship="Self.FK_sim_interrupciones_tipos_interrupciones" FromRole="sim_tipos_interrupcion" ToRole="sim_interrupciones" />
+    <NavigationProperty Name="SimSoporteICollection" Relationship="Self.FK_sim_catalogos_soporte_sim_tipos_interrupcion" FromRole="sim_tipos_interrupcion" ToRole="sim_soporte" />
+    <NavigationProperty Name="SimTipoInterrupcionTipoServicioICollection" Relationship="Self.FK_sim_interrup_servicio_sim_tipos_interrupcion" FromRole="sim_tipos_interrupcion" ToRole="sim_tipos_interrupcion_tipos_servicio" />
+    <NavigationProperty Name="SimInterrupcionCalculadaICollection" Relationship="BankingPlannerModel.FK_SimInterrupcionesCalculadas_sim_tipos_interrupcion" FromRole="sim_tipos_interrupcion" ToRole="SimInterrupcionesCalculadas" />
+  </EntityType>
+  <EntityType Name="SimTipoInterrupcionTipoServicio">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sim_tipo_interrupcion" Type="Int32" Nullable="false" />
+    <Property Name="tipo_servicio" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SimTipoInterrupcion" Relationship="Self.FK_sim_interrup_servicio_sim_tipos_interrupcion" FromRole="sim_tipos_interrupcion_tipos_servicio" ToRole="sim_tipos_interrupcion" />
+  </EntityType>
+  <Association Name="FK_sim_catalogos_detalle_sim_catalogos_servicio">
+    <End Role="sim_catalogos_servicio" Type="BankingPlannerModel.SimCatalogoServicio" Multiplicity="1" />
+    <End Role="sim_catalogos_detalle" Type="BankingPlannerModel.SimCatalogoDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_catalogos_servicio">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_catalogos_detalle">
+        <PropertyRef Name="sim_catalogo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_catalogos_detalle_sim_tipos_cliente">
+    <End Role="sim_tipos_cliente" Type="BankingPlannerModel.SimTipoCliente" Multiplicity="1" />
+    <End Role="sim_catalogos_detalle" Type="BankingPlannerModel.SimCatalogoDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_tipos_cliente">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_catalogos_detalle">
+        <PropertyRef Name="sim_tipo_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_catalogos_servicio_sim_escenarios">
+    <End Role="sim_escenarios" Type="BankingPlannerModel.SimEscenario" Multiplicity="1" />
+    <End Role="sim_catalogos_servicio" Type="BankingPlannerModel.SimCatalogoServicio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_escenarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_catalogos_servicio">
+        <PropertyRef Name="sim_escenario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_oferta_sim_catalogos_servicio">
+    <End Role="sim_catalogos_servicio" Type="BankingPlannerModel.SimCatalogoServicio" Multiplicity="1" />
+    <End Role="sim_oferta" Type="BankingPlannerModel.SimOferta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_catalogos_servicio">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_oferta">
+        <PropertyRef Name="sim_catalogo_servicio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_demanda_sim_secciones">
+    <End Role="sim_secciones" Type="BankingPlannerModel.SimSeccion" Multiplicity="1" />
+    <End Role="sim_demanda" Type="BankingPlannerModel.SimDemanda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_secciones">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_demanda">
+        <PropertyRef Name="sim_seccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_demanda_sim_tipos_cliente">
+    <End Role="sim_tipos_cliente" Type="BankingPlannerModel.SimTipoCliente" Multiplicity="1" />
+    <End Role="sim_demanda" Type="BankingPlannerModel.SimDemanda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_tipos_cliente">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_demanda">
+        <PropertyRef Name="sim_tipo_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_escenarios_sim_proyectos">
+    <End Role="sim_proyectos" Type="BankingPlannerModel.SimProyecto" Multiplicity="0..1" />
+    <End Role="sim_escenarios" Type="BankingPlannerModel.SimEscenario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_proyectos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_escenarios">
+        <PropertyRef Name="proyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_sites_sim_escenarios">
+    <End Role="sim_escenarios" Type="BankingPlannerModel.SimEscenario" Multiplicity="1" />
+    <End Role="sim_sites" Type="BankingPlannerModel.SimSite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_escenarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_sites">
+        <PropertyRef Name="sim_escenario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_tipos_cliente_sim_escenarios">
+    <End Role="sim_escenarios" Type="BankingPlannerModel.SimEscenario" Multiplicity="1" />
+    <End Role="sim_tipos_cliente" Type="BankingPlannerModel.SimTipoCliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_escenarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_tipos_cliente">
+        <PropertyRef Name="sim_escenario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_tipos_interrupcion_sim_escenarios">
+    <End Role="sim_escenarios" Type="BankingPlannerModel.SimEscenario" Multiplicity="1" />
+    <End Role="sim_tipos_interrupcion" Type="BankingPlannerModel.SimTipoInterrupcion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_escenarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_tipos_interrupcion">
+        <PropertyRef Name="sim_escenario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_interrupciones_sim_oferta">
+    <End Role="sim_oferta" Type="BankingPlannerModel.SimOferta" Multiplicity="1" />
+    <End Role="sim_interrupciones" Type="BankingPlannerModel.SimInterrupcion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_oferta">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_interrupciones">
+        <PropertyRef Name="sim_oferta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_interrupciones_tipos_interrupciones">
+    <End Role="sim_tipos_interrupcion" Type="BankingPlannerModel.SimTipoInterrupcion" Multiplicity="1" />
+    <End Role="sim_interrupciones" Type="BankingPlannerModel.SimInterrupcion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_tipos_interrupcion">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_interrupciones">
+        <PropertyRef Name="sim_tipo_interrupcion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_oferta_sim_secciones">
+    <End Role="sim_secciones" Type="BankingPlannerModel.SimSeccion" Multiplicity="1" />
+    <End Role="sim_oferta" Type="BankingPlannerModel.SimOferta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_secciones">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_oferta">
+        <PropertyRef Name="sim_seccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_soporte_sim_oferta">
+    <End Role="sim_oferta" Type="BankingPlannerModel.SimOferta" Multiplicity="1" />
+    <End Role="sim_soporte" Type="BankingPlannerModel.SimSoporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_oferta">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_soporte">
+        <PropertyRef Name="sim_oferta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_parametros_abandono_sim_tipos_cliente">
+    <End Role="sim_tipos_cliente" Type="BankingPlannerModel.SimTipoCliente" Multiplicity="1" />
+    <End Role="sim_parametros_abandono" Type="BankingPlannerModel.SimParametrosAbandono" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_tipos_cliente">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_parametros_abandono">
+        <PropertyRef Name="sim_tipo_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_parametros_atencion_sim_secciones">
+    <End Role="sim_secciones" Type="BankingPlannerModel.SimSeccion" Multiplicity="1" />
+    <End Role="sim_parametros_atencion" Type="BankingPlannerModel.SimParametrosAtencion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_secciones">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_parametros_atencion">
+        <PropertyRef Name="sim_seccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_secciones_sim_sites">
+    <End Role="sim_sites" Type="BankingPlannerModel.SimSite" Multiplicity="1" />
+    <End Role="sim_secciones" Type="BankingPlannerModel.SimSeccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_sites">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_secciones">
+        <PropertyRef Name="sim_site" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_soporte_sim_secciones">
+    <End Role="sim_secciones" Type="BankingPlannerModel.SimSeccion" Multiplicity="1" />
+    <End Role="sim_soporte" Type="BankingPlannerModel.SimSoporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_secciones">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_soporte">
+        <PropertyRef Name="sim_seccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_catalogos_soporte_sim_tipos_interrupcion">
+    <End Role="sim_tipos_interrupcion" Type="BankingPlannerModel.SimTipoInterrupcion" Multiplicity="1" />
+    <End Role="sim_soporte" Type="BankingPlannerModel.SimSoporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_tipos_interrupcion">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_soporte">
+        <PropertyRef Name="sim_tipo_interrupcion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sim_interrup_servicio_sim_tipos_interrupcion">
+    <End Role="sim_tipos_interrupcion" Type="BankingPlannerModel.SimTipoInterrupcion" Multiplicity="1" />
+    <End Role="sim_tipos_interrupcion_tipos_servicio" Type="BankingPlannerModel.SimTipoInterrupcionTipoServicio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_tipos_interrupcion">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sim_tipos_interrupcion_tipos_servicio">
+        <PropertyRef Name="sim_tipo_interrupcion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BankingPlannerEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sim_catalogos_detalle" EntityType="BankingPlannerModel.SimCatalogoDetalle" />
+    <EntitySet Name="sim_catalogos_servicio" EntityType="BankingPlannerModel.SimCatalogoServicio" />
+    <EntitySet Name="sim_demanda" EntityType="BankingPlannerModel.SimDemanda" />
+    <EntitySet Name="sim_escenarios" EntityType="BankingPlannerModel.SimEscenario" />
+    <EntitySet Name="sim_interrupciones" EntityType="BankingPlannerModel.SimInterrupcion" />
+    <EntitySet Name="sim_oferta" EntityType="BankingPlannerModel.SimOferta" />
+    <EntitySet Name="sim_parametros_abandono" EntityType="BankingPlannerModel.SimParametrosAbandono" />
+    <EntitySet Name="sim_parametros_atencion" EntityType="BankingPlannerModel.SimParametrosAtencion" />
+    <EntitySet Name="sim_proyectos" EntityType="BankingPlannerModel.SimProyecto" />
+    <EntitySet Name="sim_secciones" EntityType="BankingPlannerModel.SimSeccion" />
+    <EntitySet Name="sim_sites" EntityType="BankingPlannerModel.SimSite" />
+    <EntitySet Name="sim_soporte" EntityType="BankingPlannerModel.SimSoporte" />
+    <EntitySet Name="sim_tipos_cliente" EntityType="BankingPlannerModel.SimTipoCliente" />
+    <EntitySet Name="sim_tipos_interrupcion" EntityType="BankingPlannerModel.SimTipoInterrupcion" />
+    <EntitySet Name="sim_tipos_interrupcion_tipos_servicio" EntityType="BankingPlannerModel.SimTipoInterrupcionTipoServicio" />
+    <AssociationSet Name="FK_sim_catalogos_detalle_sim_catalogos_servicio" Association="Self.FK_sim_catalogos_detalle_sim_catalogos_servicio">
+      <End Role="sim_catalogos_servicio" EntitySet="sim_catalogos_servicio" />
+      <End Role="sim_catalogos_detalle" EntitySet="sim_catalogos_detalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_catalogos_detalle_sim_tipos_cliente" Association="Self.FK_sim_catalogos_detalle_sim_tipos_cliente">
+      <End Role="sim_tipos_cliente" EntitySet="sim_tipos_cliente" />
+      <End Role="sim_catalogos_detalle" EntitySet="sim_catalogos_detalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_catalogos_servicio_sim_escenarios" Association="Self.FK_sim_catalogos_servicio_sim_escenarios">
+      <End Role="sim_escenarios" EntitySet="sim_escenarios" />
+      <End Role="sim_catalogos_servicio" EntitySet="sim_catalogos_servicio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_oferta_sim_catalogos_servicio" Association="Self.FK_sim_oferta_sim_catalogos_servicio">
+      <End Role="sim_catalogos_servicio" EntitySet="sim_catalogos_servicio" />
+      <End Role="sim_oferta" EntitySet="sim_oferta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_demanda_sim_secciones" Association="Self.FK_sim_demanda_sim_secciones">
+      <End Role="sim_secciones" EntitySet="sim_secciones" />
+      <End Role="sim_demanda" EntitySet="sim_demanda" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_demanda_sim_tipos_cliente" Association="Self.FK_sim_demanda_sim_tipos_cliente">
+      <End Role="sim_tipos_cliente" EntitySet="sim_tipos_cliente" />
+      <End Role="sim_demanda" EntitySet="sim_demanda" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_escenarios_sim_proyectos" Association="Self.FK_sim_escenarios_sim_proyectos">
+      <End Role="sim_proyectos" EntitySet="sim_proyectos" />
+      <End Role="sim_escenarios" EntitySet="sim_escenarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_sites_sim_escenarios" Association="Self.FK_sim_sites_sim_escenarios">
+      <End Role="sim_escenarios" EntitySet="sim_escenarios" />
+      <End Role="sim_sites" EntitySet="sim_sites" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_tipos_cliente_sim_escenarios" Association="Self.FK_sim_tipos_cliente_sim_escenarios">
+      <End Role="sim_escenarios" EntitySet="sim_escenarios" />
+      <End Role="sim_tipos_cliente" EntitySet="sim_tipos_cliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_tipos_interrupcion_sim_escenarios" Association="Self.FK_sim_tipos_interrupcion_sim_escenarios">
+      <End Role="sim_escenarios" EntitySet="sim_escenarios" />
+      <End Role="sim_tipos_interrupcion" EntitySet="sim_tipos_interrupcion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_interrupciones_sim_oferta" Association="Self.FK_sim_interrupciones_sim_oferta">
+      <End Role="sim_oferta" EntitySet="sim_oferta" />
+      <End Role="sim_interrupciones" EntitySet="sim_interrupciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_interrupciones_tipos_interrupciones" Association="Self.FK_sim_interrupciones_tipos_interrupciones">
+      <End Role="sim_tipos_interrupcion" EntitySet="sim_tipos_interrupcion" />
+      <End Role="sim_interrupciones" EntitySet="sim_interrupciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_oferta_sim_secciones" Association="Self.FK_sim_oferta_sim_secciones">
+      <End Role="sim_secciones" EntitySet="sim_secciones" />
+      <End Role="sim_oferta" EntitySet="sim_oferta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_soporte_sim_oferta" Association="Self.FK_sim_soporte_sim_oferta">
+      <End Role="sim_oferta" EntitySet="sim_oferta" />
+      <End Role="sim_soporte" EntitySet="sim_soporte" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_parametros_abandono_sim_tipos_cliente" Association="Self.FK_sim_parametros_abandono_sim_tipos_cliente">
+      <End Role="sim_tipos_cliente" EntitySet="sim_tipos_cliente" />
+      <End Role="sim_parametros_abandono" EntitySet="sim_parametros_abandono" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_parametros_atencion_sim_secciones" Association="Self.FK_sim_parametros_atencion_sim_secciones">
+      <End Role="sim_secciones" EntitySet="sim_secciones" />
+      <End Role="sim_parametros_atencion" EntitySet="sim_parametros_atencion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_secciones_sim_sites" Association="Self.FK_sim_secciones_sim_sites">
+      <End Role="sim_sites" EntitySet="sim_sites" />
+      <End Role="sim_secciones" EntitySet="sim_secciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_soporte_sim_secciones" Association="Self.FK_sim_soporte_sim_secciones">
+      <End Role="sim_secciones" EntitySet="sim_secciones" />
+      <End Role="sim_soporte" EntitySet="sim_soporte" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_catalogos_soporte_sim_tipos_interrupcion" Association="Self.FK_sim_catalogos_soporte_sim_tipos_interrupcion">
+      <End Role="sim_tipos_interrupcion" EntitySet="sim_tipos_interrupcion" />
+      <End Role="sim_soporte" EntitySet="sim_soporte" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sim_interrup_servicio_sim_tipos_interrupcion" Association="Self.FK_sim_interrup_servicio_sim_tipos_interrupcion">
+      <End Role="sim_tipos_interrupcion" EntitySet="sim_tipos_interrupcion" />
+      <End Role="sim_tipos_interrupcion_tipos_servicio" EntitySet="sim_tipos_interrupcion_tipos_servicio" />
+    </AssociationSet>
+    <EntitySet Name="SimDemandasCalculadas" EntityType="BankingPlannerModel.SimDemandaCalculada" />
+    <AssociationSet Name="FK_SimDemandas_sim_demanda" Association="BankingPlannerModel.FK_SimDemandas_sim_demanda">
+      <End Role="sim_demanda" EntitySet="sim_demanda" />
+      <End Role="SimDemandasCalculadas" EntitySet="SimDemandasCalculadas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SimDemandasCalculadas_sim_oferta" Association="BankingPlannerModel.FK_SimDemandasCalculadas_sim_oferta">
+      <End Role="sim_oferta" EntitySet="sim_oferta" />
+      <End Role="SimDemandasCalculadas" EntitySet="SimDemandasCalculadas" />
+    </AssociationSet>
+    <EntitySet Name="SimInterrupcionesCalculadas" EntityType="BankingPlannerModel.SimInterrupcionCalculada" />
+    <AssociationSet Name="FK_SimInterrupcionesCalculadas_sim_oferta" Association="BankingPlannerModel.FK_SimInterrupcionesCalculadas_sim_oferta">
+      <End Role="sim_oferta" EntitySet="sim_oferta" />
+      <End Role="SimInterrupcionesCalculadas" EntitySet="SimInterrupcionesCalculadas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SimInterrupcionesCalculadas_sim_tipos_interrupcion" Association="BankingPlannerModel.FK_SimInterrupcionesCalculadas_sim_tipos_interrupcion">
+      <End Role="sim_tipos_interrupcion" EntitySet="sim_tipos_interrupcion" />
+      <End Role="SimInterrupcionesCalculadas" EntitySet="SimInterrupcionesCalculadas" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="carga_parametros_demanda_Result">
+    <Property Type="Int32" Name="sim_seccion" Nullable="false" />
+    <Property Type="Int32" Name="tipo_servicio" Nullable="false" />
+    <Property Type="Int32" Name="sim_tipo_cliente" Nullable="false" />
+    <Property Type="DateTime" Name="dtHora" Nullable="false" Precision="23" />
+    <Property Type="Double" Name="media_llegadas" Nullable="false" />
+    <Property Type="Int32" Name="media_atencion_sec" Nullable="false" />
+    <Property Type="Int32" Name="desvio_atencion_sec" Nullable="false" />
+    <Property Type="Int32" Name="limite_atencion_sec" Nullable="false" />
+    <Property Type="Int32" Name="media_espera" Nullable="false" />
+    <Property Type="Int32" Name="desvio_espera" Nullable="false" />
+    <Property Type="Int32" Name="sla" Nullable="false" />
+    <Property Type="Int32" Name="prioridad" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="SimDemandaCalculada">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SimDemandaId" Type="Int32" Nullable="false" />
+    <Property Name="DtIngreso" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DtAtencion" Type="DateTime" Precision="3" />
+    <Property Name="DtEgreso" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SimOfertaId" Type="Int32" />
+    <Property Name="ProfundidadFilaSeccion" Type="Int32" Nullable="false" />
+    <Property Name="OfertasActivas" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SimDemanda" Relationship="BankingPlannerModel.FK_SimDemandas_sim_demanda" FromRole="SimDemandasCalculadas" ToRole="sim_demanda" />
+    <NavigationProperty Name="SimOferta" Relationship="BankingPlannerModel.FK_SimDemandasCalculadas_sim_oferta" FromRole="SimDemandasCalculadas" ToRole="sim_oferta" />
+    <Property Name="DtLimiteAbandono" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <Association Name="FK_SimDemandas_sim_demanda">
+    <End Type="BankingPlannerModel.SimDemanda" Role="sim_demanda" Multiplicity="1" />
+    <End Type="BankingPlannerModel.SimDemandaCalculada" Role="SimDemandasCalculadas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_demanda">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SimDemandasCalculadas">
+        <PropertyRef Name="SimDemandaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SimDemandasCalculadas_sim_oferta">
+    <End Type="BankingPlannerModel.SimOferta" Role="sim_oferta" Multiplicity="0..1" />
+    <End Type="BankingPlannerModel.SimDemandaCalculada" Role="SimDemandasCalculadas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_oferta">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SimDemandasCalculadas">
+        <PropertyRef Name="SimOfertaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SimInterrupcionCalculada">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SimOfertaId" Type="Int32" Nullable="false" />
+    <Property Name="SimTipoInterrupcionId" Type="Int32" Nullable="false" />
+    <Property Name="DtInicio" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DtFin" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="SimOferta" Relationship="BankingPlannerModel.FK_SimInterrupcionesCalculadas_sim_oferta" FromRole="SimInterrupcionesCalculadas" ToRole="sim_oferta" />
+    <NavigationProperty Name="SimTipoInterrupcion" Relationship="BankingPlannerModel.FK_SimInterrupcionesCalculadas_sim_tipos_interrupcion" FromRole="SimInterrupcionesCalculadas" ToRole="sim_tipos_interrupcion" />
+  </EntityType>
+  <Association Name="FK_SimInterrupcionesCalculadas_sim_oferta">
+    <End Type="BankingPlannerModel.SimOferta" Role="sim_oferta" Multiplicity="1" />
+    <End Type="BankingPlannerModel.SimInterrupcionCalculada" Role="SimInterrupcionesCalculadas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_oferta">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SimInterrupcionesCalculadas">
+        <PropertyRef Name="SimOfertaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SimInterrupcionesCalculadas_sim_tipos_interrupcion">
+    <End Type="BankingPlannerModel.SimTipoInterrupcion" Role="sim_tipos_interrupcion" Multiplicity="1" />
+    <End Type="BankingPlannerModel.SimInterrupcionCalculada" Role="SimInterrupcionesCalculadas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sim_tipos_interrupcion">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SimInterrupcionesCalculadas">
+        <PropertyRef Name="SimTipoInterrupcionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
